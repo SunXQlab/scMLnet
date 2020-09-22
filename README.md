@@ -93,7 +93,7 @@ File|Description
 
 A demonstration of using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of COVID-19 patients BALF can be found at following vignette. The expression matrix and annotation of clstuers can be found in the  /data folder and the prior information about interactions in the /database folder.
 
-* Vignette: <a href="./vignettes/Tutorial_of_scMLnet.html" target="_blank">Tutorial of scMLnet</a>
+* Vignette: Tutorial of scMLnet
 
 
 
