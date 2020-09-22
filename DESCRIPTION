@@ -1,0 +1,16 @@
+Package: scMLnet
+Type: Package
+Title: The Construction of Multi-layer Singaling Network
+Version: 0.1.0
+Author: Dong xj <dxj100@139.com>
+Maintainer: Cheng jy <jyc_1427@163.com>
+Description: scMLnet is an R package developed to construct inter- & intra-cellular multi-layer singaling network based on single-cell RNA-seq expression data.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Imports: Seurat, Matrix, parallel, methods, utils, stats
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
