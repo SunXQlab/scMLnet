@@ -15,7 +15,7 @@ The main steps of the scMLnet algorithm include:
 * **Step4 constructing multi-layer signaling network**: defines multi-layer signaling network by overlapping the Ligand-Receptor, TF-Target gene, Receptor-TF subnetworks according to common receptors and TFs.
 
 <div align=center>
-<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/illustration.png" width="800" height="564" alt="" />
+<img src="./figure/illustration.png" width="800" height="564" alt="" />
 </div>
 
 
