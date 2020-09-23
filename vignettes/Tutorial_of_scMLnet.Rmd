@@ -99,7 +99,7 @@ DrawMLnet(netList,LigClu,RecClu,workdir,PyHome,plotMLnet = T)
 ```
 
 <div align=center>
-<img src="../figure/demo2.png" width="400" height="350" alt="demo2" />
+<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/demo2.png" width="400" height="350" alt="demo2" />
 </div>
 
 ---
@@ -164,5 +164,5 @@ for (name in names(netList)) {
 The demo of microenvironment-mediated ACE2 regulation based on the scRNA-seq data of bronchoalveolar lavage fluid (BALF) in COVID-19 patients:
 
 <div align=center>
-<img src="../figure/demo1.png" width="600" height="350" alt="demo1" />
+<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/demo1.png" width="600" height="350" alt="demo1" />
 </div>
