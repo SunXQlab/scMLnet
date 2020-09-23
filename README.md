@@ -14,10 +14,7 @@ The main steps of the scMLnet algorithm include:
 * **Step3 Constructing Receptor-TF subnetwork**: defines potient Receptor-TF subnetworks from activated TFs and Receptor-TF database by Fisher’s exact test. Activated receptors can be inferred from the TF-Target gene subnetwork.
 * **Step4 constructing multi-layer signaling network**: defines multi-layer signaling network by overlapping the Ligand-Receptor, TF-Target gene, Receptor-TF subnetworks according to common receptors and TFs.
 
-<div align=center>
-<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/illustration.png" width="800" height="564" alt="" />
-</div>
-
+![image](https://github.com/YUZIXD/scMLnet/blob/master/figure/illustration.png)
 
 ## Installation
 
@@ -70,9 +67,7 @@ The output of scMLnet has two forms:
 
 (2) visualization of the constructed multilayer network using the pymnet library.
 
-<div align=center>
-<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/demo2.png" width="400" height="350" alt="" />
-</div>
+![image](https://github.com/YUZIXD/scMLnet/blob/master/figure/demo2.png)
 
 ## Working directory structure
 
