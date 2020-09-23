@@ -12,9 +12,9 @@ The main steps of the scMLnet algorithm include:
 * **Step1 Constructing Ligand-Receptor subnetwork**: defines potential Ligand-Receptor subnetworks from scRNA-Seq data and Ligand-Receptor database by getting highly expressed genes (HEGs). HEGs in Type A (sender cells) are considered as potential ligands and HEGs in Type B (receiver cells) as potential receptors.
 * **Step2 Constructing TF-Target gene subnetwork**: defines potient TF-Target gene subnetworks from scRNA-Seq data and TF-Target gene database by getting HEG and Fisher’s exact test. HEGs in Type B are considered as potential target genes. Activated TFs can be inferred from the TF-Target gene subnetwork.
 * **Step3 Constructing Receptor-TF subnetwork**: defines potient Receptor-TF subnetworks from activated TFs and Receptor-TF database by Fisher’s exact test. Activated receptors can be inferred from the TF-Target gene subnetwork.
-* **Step4 constructing multi-layer signaling network**: defines multi-layer signaling network by overlapping the Ligand-Receptor, TF-Target gene, Receptor-TF subnetworks according to common receptors and TFs.
+* **Step4 constructing multi-layer signaling network**: defines multi-layer signaling network by performing correlation analysis between receptors and TFs, TFs and target genes and then overlapping the Ligand-Receptor, TF-Target gene, Receptor-TF subnetworks according to common receptors and TFs.
 
-![image](illustration.png)
+![image](./vignettes/illustration.png)
 
 ## Installation
 
@@ -67,7 +67,7 @@ The output of scMLnet has two forms:
 
 (2) visualization of the constructed multilayer network using the pymnet library.
 
-![image](demo2.png)
+![image](./vignettes/sample.png)
 
 ## Working directory structure
 
@@ -88,7 +88,7 @@ File|Description
 
 A demonstration of using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of COVID-19 patients BALF can be found at following vignette. The expression matrix and annotation of clstuers can be found in the  /data folder and the prior information about interactions in the /database folder.
 
-* Vignette: <a href="https://github.com/YUZIXD/scMLnet/blob/master/vignettes/Tutorial_of_scMLnet.md" target="_blank">Tutorial of scMLnet</a>
+* Vignette: <a href="./vignettes/Tutorial_of_scMLnet.md" target="_blank">Tutorial of scMLnet</a>
 
 
 

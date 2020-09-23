@@ -69,7 +69,7 @@ If you want to visualize the tabular results of multi-layer signaling network, m
 
 
 <div align=center>
-<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/demo2.png" width="400" height="350" alt="demo2" />
+<img src="./demo2.png" width="400" height="350" alt="demo2" />
 </div>
 
 ---
@@ -126,7 +126,7 @@ In the above section, we only focus one pairs of cell type every time, however w
 The demo of multi-cellular-mediated ACE2 regulation based on the scRNA-seq data of bronchoalveolar lavage fluid (BALF) in COVID-19 patients:
 
 <div align=center>
-<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/demo1.png" width="600" height="350" alt="demo1" />
+<img src="./demo1.png" width="600" height="350" alt="demo1" />
 </div>
 
 
