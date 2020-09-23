@@ -15,7 +15,7 @@ The main steps of the scMLnet algorithm include:
 * **Step4 constructing multi-layer signaling network**: defines multi-layer signaling network by overlapping the Ligand-Receptor, TF-Target gene, Receptor-TF subnetworks according to common receptors and TFs.
 
 <div align=center>
-<img src="./figure/illustration.png" width="800" height="564" alt="" />
+<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/illustration.png" width="800" height="564" alt="" />
 </div>
 
 
@@ -93,7 +93,7 @@ File|Description
 
 A demonstration of using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of COVID-19 patients BALF can be found at following vignette. The expression matrix and annotation of clstuers can be found in the  /data folder and the prior information about interactions in the /database folder.
 
-* Vignette: Tutorial of scMLnet
+* Vignette: <a href="https://htmlpreview.github.io/?https://github.com/YUZIXD/scMLnet/blob/master/vignettes/Tutorial_of_scMLnet.html" target="_blank">Tutorial of scMLnet</a>
 
 
 
