@@ -1,6 +1,6 @@
 #Part1:getHighExpGene
 #output:GeneList
-getHighExpGene <- function(GCMat,barCluTable,CluNum.1,CluNum.2,pval,logfc,cores=NULL)
+getHighExpGene <- function(GCMat,barCluTable,CluNum.1,CluNum.2,pval,logfc,cores)
 {
   
   #Function
@@ -142,7 +142,7 @@ getHighExpGene <- function(GCMat,barCluTable,CluNum.1,CluNum.2,pval,logfc,cores=
       return(result$p.value)
     }
     
-    if(is.null(cores)){
+    if(cores == 1){
       
       print("do T-test")
       p_val <- lapply(genes.use,getpval)
@@ -496,7 +496,6 @@ PairToTable <- function(PairList,LName,RName)
 #' @param LigClu character: The neighboring cell
 #' @param pval Screening threshold for getting high expressed gene in cluster. The default setting is 0.05.
 #' @param logfc Screening threshold for getting high expressed gene in cluster. The default setting is 0.15.
-#' @param cores Number: The number of cores available. We can set the cores parameter to speed up the calculation of T-Test.
 #' @param LigRecLib The file path of Ligand-Receptor interactions. The default setting is 'LigRec.txt' file in the /databases/ folder.
 #' @param TFTarLib The file path of TF-TarFget gene interactions. The default setting is 'TFTargetGene.txt' file in the /databases/ folder.
 #' @param RecTFLib The file path of Receptor-TF interactions. The default setting is 'RecTF.txt' file in the /databases/ folder.
@@ -513,7 +512,7 @@ PairToTable <- function(PairList,LName,RName)
 #' transcription factor or target gene. The third column is used to visualize the signaling subnetwork.
 #'
 RunMLnet <- function(GCMat, BarCluFile, RecClu, LigClu,
-                     pval = 0.05, logfc = 0.15, cores = NULL,
+                     pval = 0.05, logfc = 0.15, 
                      LigRecLib = "./database/LigRec.txt",
                      TFTarLib = "./database/TFTargetGene.txt",
                      RecTFLib = "./database/RecTF.txt")
@@ -523,6 +522,10 @@ RunMLnet <- function(GCMat, BarCluFile, RecClu, LigClu,
   LigRecFile <- LigRecLib
   TFTableFile <- TFTarLib
   RecTFTableFile <- RecTFLib
+  
+  #get cores
+  cores_num <- detectCores()
+  cores = ifelse(cores_num>1,cores_num-1,1)
   
   #remove cell not in GCMat
   BarCluTable <- read.table(BarCluFile,sep = "\t",header = TRUE,stringsAsFactors = FALSE)

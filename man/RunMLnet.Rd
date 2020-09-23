@@ -11,7 +11,6 @@ RunMLnet(
   LigClu,
   pval = 0.05,
   logfc = 0.15,
-  cores = NULL,
   LigRecLib = "./database/LigRec.txt",
   TFTarLib = "./database/TFTargetGene.txt",
   RecTFLib = "./database/RecTF.txt"
@@ -29,8 +28,6 @@ RunMLnet(
 \item{pval}{Screening threshold for getting high expressed gene in cluster. The default setting is 0.05.}
 
 \item{logfc}{Screening threshold for getting high expressed gene in cluster. The default setting is 0.15.}
-
-\item{cores}{Number: The number of cores available. We can set the cores parameter to speed up the calculation of T-Test.}
 
 \item{LigRecLib}{The file path of Ligand-Receptor interactions. The default setting is 'LigRec.txt' file in the /databases/ folder.}
 
