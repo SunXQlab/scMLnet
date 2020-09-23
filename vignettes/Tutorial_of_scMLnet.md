@@ -1,7 +1,7 @@
 # Tutorial of scMLnet
-Compiled: September 21, 2020
+Compiled: September 15, 2020
 
-For this tutorial, we will be using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of COVID-19 patients BALF. The expression matrix and annotation of clstuers can be found in the `/data` folder and the prior information about interactions in the `/database` folder.
+For this tutorial, we will be using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of BALF in COVID-19 patients. The expression matrix and annotation of clstuers can be found in the `/data` folder and the prior information about interactions in the `/database` folder.
 
 # Preparation
 
@@ -16,7 +16,7 @@ We start by loading all required packages. The `Seurat` package is used for norm
 
 ## Input data
 
-We then read a raw scRNA-Seq data with rows as genes (gene symbols) and columns as cells and the gene expression matrix is required as a sparse matrix. Annotation of cell type consists of two columns: the first column is barcode and the second is cell type. The column number of the gene expression matrix should consistent with the row number of the annotation table. Numbers can also be used to replace specific cell types in BarCluFile, but the biological explanation of cell-cell communication between groups is not clear enough.
+We then read a raw scRNA-Seq data with rows as genes (gene symbols) and columns as cells and the gene expression matrix is required as a sparse matrix. Annotation of cell type consists of two columns: the first column is barcode and the second is cell type. The column number of the gene expression matrix should be consistent with the row number of the annotation table. Numbers can also be used to replace specific cell types in BarCluFile, but with less biological explanation of cell-cell communication between groups.
 
         # import sample data
         GCMat <- readRDS("./data/data.Rdata")
@@ -26,7 +26,7 @@ We then read a raw scRNA-Seq data with rows as genes (gene symbols) and columns 
         BarCluFile <- "./data/barcodetype.txt"
         BarCluTable <- read.table(BarCluFile,sep = "\t",header = TRUE,stringsAsFactors = FALSE)
 
-We next define the receiver cell and sender cell that we want to explorer the cell-cell communication between them. In this time, we focus on the inter-/intracellular signaling network between B cells as sender cell and Secretory cells as receiver cell (**NOTE**: make sure the `LigClu` and `RecClu` parameters are the values in the annotation table).
+We next define the receiver cell and sender cell that we want to explorer the cell-cell communication between them. In this example, we focus on the inter-/intracellular signaling network between B cells as senders and Secretory cells as receivers (**NOTE**: make sure the `LigClu` and `RecClu` parameters are the values in the annotation table).
 
         types <- unique(BarCluTable$Cluster)
         
@@ -35,11 +35,9 @@ We next define the receiver cell and sender cell that we want to explorer the ce
 
 ## Default parameters
 
-Default parameter settings are as follows. Users can provide their own databases which must including three colums: molecule A, molecule B and key (connecting A with B by underlined). Molecules A and B need to have clear identities (i.e., Ligand, Receptor, TF and Target gene), and there are interactions between them (i.e., Ligand_Receptor, Receptor_TF and TF_Gene interactions).
+Default parameter settings are as follows. Users can provide their own databases which must including three colums: molecule A, molecule B and key (connecting A with B by underlined). Molecules A and B need to have clear identities (i.e., Ligand, Receptor, TF and Target gene), and there should be interactions between them (i.e., Ligand_Receptor, Receptor_TF and TF_Gene interactions).
 
-According to the difference (subjected to `pct` parameter) and ratio (subjected to `logfc` parameter) of gene expression percentage between the sender cells and receiver cells, we firstly define specific highly expressed genes in each of the two types of cells. The highly expressed genes in sender cells are considered as potential ligands and the highly expressed genes in receiver cells are considered as potential receptors and target genes. We screen the potential Ligand-Receptor interactions by searching the Ligands-Receptor pairs in database.
-
-We then screen the potential Receptor-TF, TF-Target gene interactions by Fisher's Exact Test (subjected to `pval` parameter). The potential TF-Target gene interactions can be inferred from the potential target genes and the potential Receptor-TF interactions can be inferred from the potential activated TF from the potential TF-Target gene interactions.
+According to the difference (subjected to `pct` parameter) and ratio (subjected to `logfc` parameter) of gene expression percentage between the sender cells and receiver cells, we firstly define specific highly expressed genes in each of the two types of cells. The highly expressed genes in sender cells are considered as potential ligands and the highly expressed genes in receiver cells are considered as potential receptors and target genes. We screen the potential Ligand-Receptor interactions by searching the Ligands-Receptor pairs in database. We then screen the potential Receptor-TF, TF-Target gene interactions by Fisher's Exact Test (subjected to `pval` parameter). 
 
         pval <- 0.05
         logfc <- 0.15
@@ -59,7 +57,7 @@ Running time of getting highly expressed genes depends on the t-test of gene exp
 
 # Save and Visualization of Multi-layer Signaling Networks
 
-The output `netList` is a list consisted of gene pairs connecting each upstream layer and downstream layer (i.e., Ligand_Receptor, Receptor_TF and TF_Gene subnetworks). The signaling subnetwork is returned as a dataframe object as the same structure as sample databases. 
+The output `netList` is a list consisiting of gene pairs connecting each upstream layer and downstream layer (i.e., Ligand_Receptor, Receptor_TF and TF_Gene subnetworks). The signaling subnetwork is returned as a dataframe object as the same structure as sample databases. 
 
         workdir <- "sample"
         DrawMLnet(netList,LigClu,RecClu,workdir,plotMLnet = F)
@@ -73,14 +71,14 @@ If you want to visualize the tabular results of multi-layer signaling network, m
 
 
 <div align=center>
-<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/demo2.png" width="400" height="350" alt="demo2" />
+<img src="../demo2.png" width="400" height="350" alt="demo2" />
 </div>
 
 ---
 
 # Construction of Multi-cellular Multi-layer Signaling Networks
 
-In scMLnet, we only focus one pairs of cell type every time, however we can always remain the same receiver cells and only change sender cells so as to construct the microenvironment of receiver cells (the central cells) affected by sender cells (neighbor cells). 
+In the above section, we only focus one pairs of cell type every time, however we can always remain the same receiver cells and only change sender cells so as to construct the multi-cellular multi-layer signaling networks of receiver cells (the central cells) affected by sender cells (neighbor cells). 
 
         # import data
         GCMat <- readRDS("./data/data.Rdata")
@@ -133,6 +131,6 @@ In scMLnet, we only focus one pairs of cell type every time, however we can alwa
 The demo of microenvironment-mediated ACE2 regulation based on the scRNA-seq data of bronchoalveolar lavage fluid (BALF) in COVID-19 patients:
 
 <div align=center>
-<img src="https://github.com/YUZIXD/scMLnet/blob/master/figure/demo1.png" width="600" height="350" alt="demo1" />
+<img src="../demo1.png" width="600" height="350" alt="demo1" />
 </div>
 
