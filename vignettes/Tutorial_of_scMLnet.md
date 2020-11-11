@@ -1,7 +1,8 @@
 # Tutorial of scMLnet
 Compiled: September 15, 2020
 
-For this tutorial, we will be using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of BALF in COVID-19 patients. The expression matrix and annotation of clstuers can be found in the `/data` folder and the prior information about interactions in the `/database` folder.
+For this tutorial, we will be using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of BALF in COVID-19 patients. The expression matrix and annotation of clstuers can be found in the `/example` folder (or be downloaded from <a href="https://zenodo.org/record/4267609#.X6uRrVC-vVg" target="_blank">Zenodo</a>) and the prior information about interactions in the `/database` folder.
+
 
 # Preparation
 
@@ -19,11 +20,11 @@ We start by loading all required packages. The `Seurat` package is used for norm
 We then read a raw scRNA-Seq data with rows as genes (gene symbols) and columns as cells and the gene expression matrix is required as a sparse matrix. Annotation of cell type consists of two columns: the first column is barcode and the second is cell type. The column number of the gene expression matrix should be consistent with the row number of the annotation table. Numbers can also be used to replace specific cell types in BarCluFile, but with less biological explanation of cell-cell communication between groups.
 
         # import sample data
-        GCMat <- readRDS("./data/data.Rdata")
+        GCMat <- readRDS("./example/data.Rdata")
         GCMat<- as(GCMat,"dgCMatrix")
         
         # import sample annotation
-        BarCluFile <- "./data/barcodetype.txt"
+        BarCluFile <- "./example/barcodetype.txt"
         BarCluTable <- read.table(BarCluFile,sep = "\t",header = TRUE,stringsAsFactors = FALSE)
 
 We next define the receiver cell and sender cell that we want to explorer the cell-cell communication between them. In this example, we focus on the inter-/intracellular signaling network between B cells as senders and Secretory cells as receivers (**NOTE**: make sure the `LigClu` and `RecClu` parameters are the values in the annotation table).
@@ -79,11 +80,11 @@ If you want to visualize the tabular results of multi-layer signaling network, m
 In the above section, we only focus one pairs of cell type every time, however we can always remain the same receiver cells and only change sender cells so as to construct the multi-cellular multi-layer signaling networks of receiver cells (the central cells) affected by sender cells (neighbor cells). 
 
         # import data
-        GCMat <- readRDS("./data/data.Rdata")
+        GCMat <- readRDS("./example/data.Rdata")
         GCMat<- as(GCMat,"dgCMatrix")
         
         # import annotation
-        BarCluFile <- "./data/barcodetype.txt"
+        BarCluFile <- "./example/barcodetype.txt"
         BarCluTable <- read.table(BarCluFile,sep = "\t",header = TRUE,stringsAsFactors = FALSE)
         
         ## get LigClu

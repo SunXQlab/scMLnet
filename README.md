@@ -14,7 +14,7 @@ The main steps of the scMLnet algorithm include:
 * **Step3 Constructing Receptor-TF subnetwork**: defines potient Receptor-TF subnetworks from activated TFs and Receptor-TF database by Fisher’s exact test. Activated receptors can be inferred from the TF-Target gene subnetwork.
 * **Step4 constructing multi-layer signaling network**: defines multi-layer signaling network by performing correlation analysis between receptors and TFs, TFs and target genes and then overlapping the Ligand-Receptor, TF-Target gene, Receptor-TF subnetworks according to common receptors and TFs.
 
-![image](./vignettes/illustration.png)
+![](./vignettes/illustration.png)
 
 ## Installation
 
@@ -29,7 +29,6 @@ and then copy the /pymnet/sampling folder to the installation path (%PYTHONHOME%
 The following R packages should be installed for creating the multi-layer singal network, please install before the installation of scMLnet:
     
 * Seurat
-* Matrix
 * parallel   
     
 ### 2.Installation
@@ -67,7 +66,7 @@ The output of scMLnet has two forms:
 
 (2) visualization of the constructed multilayer network using the pymnet library.
 
-![image](./vignettes/sample.png)
+![](./vignettes/sample.png)
 
 ## Working directory structure
 
@@ -75,7 +74,7 @@ The Working Directory requires the following files and directories:
 
 File|Description
 ---|---
-/data|Input directory including scRNA-Seq data and clustering results
+/example|Input directory including scRNA-Seq data and clustering results
 /database|Prior information about interactions between ligands, receptors, TFs and target genes
 /database/LigRec.txt|The Ligand-Receptor interactions including three colums: Ligand, Receptor and Key (links connecting ligands with receptors by underlined)
 /database/RecTF.txt|The Receptor-TF interactions including three colums: Receptor, TF and Key (links connecting receptors with TFs by underlined)
@@ -86,9 +85,16 @@ File|Description
 
 ## Demonstration
 
-A demonstration of using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of COVID-19 patients BALF can be found at following vignette. The expression matrix and annotation of clstuers can be found in the  /data folder and the prior information about interactions in the /database folder.
+A demonstration of using scMLnet to construct the multi-layer signaling network between B cells and Secretory cells from scRNA-Seq data of COVID-19 patients BALF can be found at following vignette. The expression matrix and annotation of clstuers can be found in the  /example folder and the prior information about interactions in the /database folder.
 
 * Vignette: <a href="./vignettes/Tutorial_of_scMLnet.md" target="_blank">Tutorial of scMLnet</a>
 
+## Citation
+
+Please cite the following paper when you use scMLnet:
 
 
+>Cheng J, Zhang J, Wu Z, Sun X*. Inferring microenvironmental regulation of gene expression from single-cell RNA sequencing data using scMLnet with an application to COVID-19. Briefings in Bioinformatics. 2020. Bbaa327.
+
+
+The R code used for analysis in this paper is available at https://github.com/SunXQlab/paper-covid19

@@ -1,4 +1,4 @@
-#' Title Save and Draw the Multi-layer Signaling Network
+#' @title Save and Draw the Multi-layer Signaling Network
 #'
 #' @param MLnetList The output of Run_MLnet function.
 #' @param LigClu character: The neighboring cell

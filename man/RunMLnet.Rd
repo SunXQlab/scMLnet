@@ -2,7 +2,7 @@
 % Please edit documentation in R/Run_scMLnet.R
 \name{RunMLnet}
 \alias{RunMLnet}
-\title{Title Generate Multi-layer Signal Networks}
+\title{Generate Multi-layer Signal Networks}
 \usage{
 RunMLnet(
   GCMat,

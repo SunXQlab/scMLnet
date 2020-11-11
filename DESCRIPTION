@@ -9,8 +9,8 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-Imports: Seurat, Matrix, parallel, methods, utils, stats
-Suggests: 
-    knitr,
-    rmarkdown
+Imports: Seurat, parallel, methods
+Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2020-11-11 09:09:20 UTC; admin

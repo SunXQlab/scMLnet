@@ -395,7 +395,7 @@ getCorR <- function(GCMat,keys,cells)
   
   rownames(cor_df) <- key_df$key
   colnames(cor_df) <- c("R","pval")
-  cor_df <- cor_df[cor_df[,2] < 0.05,]
+  cor_df <- cor_df[ cor_df[,1] > 0 &  cor_df[,2] < 0.05,]
   
   return(rownames(cor_df))
   
@@ -485,7 +485,7 @@ PairToTable <- function(PairList,LName,RName)
 
 ###################
 
-#' Title Generate Multi-layer Signal Networks
+#' @title Generate Multi-layer Signal Networks
 #'
 #' @description
 #' This function constructs the Ligand_Receptor, Receptor_TF, TF_TarGene networks between the central cell and neighboring cells according to scRNA-Seq expression matrix and barcode table
@@ -500,7 +500,11 @@ PairToTable <- function(PairList,LName,RName)
 #' @param TFTarLib The file path of TF-TarFget gene interactions. The default setting is 'TFTargetGene.txt' file in the /databases/ folder.
 #' @param RecTFLib The file path of Receptor-TF interactions. The default setting is 'RecTF.txt' file in the /databases/ folder.
 #'
-#' @import Seurat, parallel, Matrix, stats, methods, utils
+#' @import Seurat 
+#' @import parallel 
+#' @importFrom methods as
+#' @importFrom stats cor.test t.test
+#' @importFrom utils read.table
 #'
 #' @export
 #'

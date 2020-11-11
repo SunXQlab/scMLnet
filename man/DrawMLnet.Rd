@@ -2,7 +2,7 @@
 % Please edit documentation in R/Draw_MLnet.R
 \name{DrawMLnet}
 \alias{DrawMLnet}
-\title{Title Save and Draw the Multi-layer Signaling Network}
+\title{Save and Draw the Multi-layer Signaling Network}
 \usage{
 DrawMLnet(MLnetList, LigClu, RecClu, outdir = NULL, PyHome, plotMLnet = F)
 }
