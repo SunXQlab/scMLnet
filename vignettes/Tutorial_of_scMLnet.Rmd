@@ -55,16 +55,14 @@ RecClu <- "Secretory"     #types[8]
 
 ## Default parameters
 
-Default parameter settings are as follows. Users can provide their own databases which must including three colums: molecule A, molecule B and key (connecting A with B by underlined). Molecules A and B need to have clear identities (i.e., Ligand, Receptor, TF and Target gene), and there are interactions between them (i.e., Ligand_Receptor, Receptor_TF and TF_Gene interactions).
+Default parameter settings are as follows. Users can provide their own databases which must including three colums: molecule A, molecule B and key (connecting A with B by underlined). Molecules A and B need to have clear identities (i.e., Ligand, Receptor, TF and Target gene), and there should be interactions between them (i.e., Ligand_Receptor, Receptor_TF and TF_Gene interactions).
 
-According to the difference (subjected to `pct` parameter) and ratio (subjected to `logfc` parameter) of gene expression percentage between the sender cells and receiver cells, we firstly define specific highly expressed genes in each of the two types of cells. The highly expressed genes in sender cells are considered as potential ligands and the highly expressed genes in receiver cells are considered as potential receptors and target genes. We screen the potential Ligand-Receptor interactions by searching the Ligands-Receptor pairs in database.
+According to the difference (subjected to `pct` parameter) and ratio (subjected to `logfc` parameter) of gene expression percentage between the sender cells and receiver cells, we firstly define specific highly expressed genes in each of the two types of cells. The highly expressed genes in sender cells are considered as potential ligands and the highly expressed genes in receiver cells are considered as potential receptors and target genes. We screen the potential Ligand-Receptor interactions by searching the Ligands-Receptor pairs in database. We then screen the potential Receptor-TF, TF-Target gene interactions by Fisher's Exact Test (subjected to pval parameter).
 
-We then screen the potential Receptor-TF, TF-Target gene interactions by Fisher's Exact Test (subjected to `pval` parameter). The potential TF-Target gene interactions can be inferred from the potential target genes and the potential Receptor-TF interactions can be inferred from the potential activated TF from the potential TF-Target gene interactions.
 
 ```{r eval=FALSE}
 pval <- 0.05
 logfc <- 0.15
-cores <- NULL
 LigRecLib <- "./database/LigRec.txt"
 TFTarLib <- "./database/TFTargetGene.txt"
 RecTFLib <- "./database/RecTF.txt"
@@ -72,12 +70,12 @@ RecTFLib <- "./database/RecTF.txt"
 
 # Construction of Multi-layer Signaling Networks
 
-Running time of getting highly expressed genes depends on the t-test of gene expression in two types of cells. Setting the `cores` parameter can improve the performance of scMLnet (**Precondition**: the parallel package has been installed and the number of cores available is set up correctly).
+Running time of getting highly expressed genes depends on the t-test of gene expression in two types of cells. Doing t-test in parallel can improve the performance of scMLnet (Precondition: the parallel package has been installed). The default cores in parallel is set to the number of available logical cores minus one.
+
 
 ```{r eval=FALSE}
-cores <- detectCores()-1
 netList <- RunMLnet(GCMat, BarCluFile, RecClu, LigClu, 
-                    pval, logfc, cores, 
+                    pval, logfc,
                     LigRecLib, TFTarLib, RecTFLib)
 ```
 
@@ -106,7 +104,8 @@ DrawMLnet(netList,LigClu,RecClu,workdir,PyHome,plotMLnet = T)
 
 # Construction of Multi-cellular Multi-layer Signaling Networks
 
-In scMLnet, we only focus one pairs of cell type every time, however we can always remain the same receiver cells and only change sender cells so as to construct the microenvironment of receiver cells (the central cells) affected by sender cells (neighbor cells). 
+In scMLnet, we only focus one pairs of cell type every time, however we can always remain the same receiver cells and only change sender cells so as to construct the multi-cellular multi-layer signaling networks of receiver cells (the central cells) affected by sender cells (neighbor cells).
+
 
 ```{r eval=FALSE}
 
@@ -122,9 +121,6 @@ BarCluTable <- read.table(BarCluFile,sep = "\t",header = TRUE,stringsAsFactors =
 LigClus <- unique(BarCluTable$Cluster)
 LigClus <- LigClus[-grep("Secretory|Doublets",LigClus)]
 
-## get cores
-cores <- detectCores()-1
-
 ## creat MLnet
 netList <- list()
 for(ligclu in LigClus){
@@ -136,12 +132,12 @@ for(ligclu in LigClus){
   name <- paste(strsplit(LigClu,split = "\\W")[[1]][1],RecClu,sep = "_")
   
   #main
-  netList[[name]] <- RunMLnet(GCMat,BarCluFile,RecClu,LigClu,cores = cores)
+  netList[[name]] <- RunMLnet(GCMat,BarCluFile,RecClu,LigClu)
   
 }
 
 ## save output and plot MLnet
-workdir <- "microenvironment"
+workdir <- "multi-cellular"
 for (name in names(netList)) {
   
   #scMLnet output
