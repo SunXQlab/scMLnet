@@ -377,7 +377,7 @@ getCorR <- function(GCMat,keys,cells)
   key_df$gene.2 <- unlist(lapply(keys,function(key){strsplit(key,"_")[[1]][2]}))
   
   key_df <- key_df[ key_df$gene.1 %in% rownames(GCMat) & key_df$gene.2 %in% rownames(GCMat),]
-  key_df <- key_df[ rowMeans(GCMat[key_df$gene.1,])>0 & rowMeans(GCMat[key_df$gene.2,])>0 ,]
+  key_df <- key_df[ Matrix::rowMeans(GCMat[key_df$gene.1,])>0 & Matrix::rowMeans(GCMat[key_df$gene.2,])>0 ,]
   
   #cal cor
   cor_df <- matrix(nrow = nrow(key_df), ncol = 2)
